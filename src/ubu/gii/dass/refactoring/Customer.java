@@ -3,9 +3,9 @@ package ubu.gii.dass.refactoring;
 /**
 * Tema  Refactorizaciones 
 *
-* Ejemplo de aplicación de refactorizaciones. Actualizado para colecciones genéricas de java 1.5
+* Ejemplo de aplicaciï¿½n de refactorizaciones. Actualizado para colecciones genï¿½ricas de java 1.5
 *
-* @author M. Fowler y <A HREF="mailto:clopezno@ubu.es">Carlos López</A>
+* @author M. Fowler y <A HREF="mailto:clopezno@ubu.es">Carlos Lï¿½pez</A>
 * @version 1.1
 * @see java.io.File
 *
@@ -14,16 +14,16 @@ import java.util.*;
 
 public class Customer {
 	private String _name;
-	private Vector<Rental> _rentals;
+	private List<Rental> _rentals;
 
 	public Customer(String name) {
 		_name = name;
-		_rentals = new Vector<Rental>();
+		_rentals = new ArrayList<Rental>();
 
 	};
 
 	public void addRental(Rental arg) {
-		_rentals.addElement(arg);
+		_rentals.add(arg);
 	}
 
 	public String getName() {
@@ -33,12 +33,28 @@ public class Customer {
 	public String statement() {
 		double totalAmount = 0;
 		int frequentRenterPoints = 0;
-		Enumeration<Rental> rentals = _rentals.elements();
+		Iterator<Rental> rentals = _rentals.iterator();
 		String result = "Rental Record for " + getName() + "\n";
-		while (rentals.hasMoreElements()) {
+		while (rentals.hasNext()) {
 			double thisAmount = 0;
-			Rental each = rentals.nextElement();
-			thisAmount = amountFor(thisAmount, each);
+			Rental each = rentals.next();
+			// determine amounts for each line
+			switch (each.getMovie().getPriceCode()) {
+			case Movie.REGULAR:
+				thisAmount += 2;
+				if (each.getDaysRented() > 2)
+					thisAmount += (each.getDaysRented() - 2) * 1.5;
+				break;
+			case Movie.NEW_RELEASE:
+				thisAmount += each.getDaysRented() * 3;
+				break;
+			case Movie.CHILDRENS:
+				thisAmount += 1.5;
+				if (each.getDaysRented() > 3)
+					thisAmount += (each.getDaysRented() - 3) * 1.5;
+				break;
+			}
+			
 			// add frequent renter points
 			frequentRenterPoints++;
 			// add bonus for a two day new release rental
@@ -55,25 +71,5 @@ public class Customer {
 		result += "You earned " + String.valueOf(frequentRenterPoints)
 				+ " frequent renter points";
 		return result;
-	}
-
-	private double amountFor(double thisAmount, Rental each) {
-		// determine amounts for each line
-		switch (each.getMovie().getPriceCode()) {
-		case Movie.REGULAR:
-			thisAmount += 2;
-			if (each.getDaysRented() > 2)
-				thisAmount += (each.getDaysRented() - 2) * 1.5;
-			break;
-		case Movie.NEW_RELEASE:
-			thisAmount += each.getDaysRented() * 3;
-			break;
-		case Movie.CHILDRENS:
-			thisAmount += 1.5;
-			if (each.getDaysRented() > 3)
-				thisAmount += (each.getDaysRented() - 3) * 1.5;
-			break;
-		}
-		return thisAmount;
 	}
 }
