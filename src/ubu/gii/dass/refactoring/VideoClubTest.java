@@ -1,22 +1,28 @@
 package ubu.gii.dass.refactoring;
-import junit.framework.*;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Tema Refactorizaciones
  * 
- * Ejemplo de aplicación de refactorizaciones. Actualizado para colecciones
- * genéricas de java 1.5
+ * Ejemplo de aplicaciÃ³n de refactorizaciones. Actualizado para colecciones
+ * genÃ©ricas de java 1.5
  * 
- * @author M. Fowler y <A HREF="mailto:clopezno@ubu.es">Carlos López</A>
+ * @author M. Fowler y <A HREF="mailto:clopezno@ubu.es">Carlos Lï¿½pez</A>
  * @version 1.1
 
  * 
  */
-public class VideoClubTest extends TestCase {
+public class VideoClubTest {
 	protected Movie m0, m11, m12, m2;
 	protected Customer c1;
-
-	protected void setUp() {
+	
+	@Before
+	public void setUp() {
 		m11 = new Movie("Sky Captain", 1);
 		m12 = new Movie("Alejandro Magno", 1);
 		m0 = new Movie("Accion Mutante", 0);
@@ -25,12 +31,10 @@ public class VideoClubTest extends TestCase {
 		c1 = new Customer("Manuel");
 	}
 
+	@After
+	public void tearDown() throws Exception {}
 
-	public static Test suite() {
-
-		return new TestSuite(VideoClubTest.class);
-	}
-
+	@Test
 	public void testAlquiler() {
 
 		Rental r1 = new Rental(m11, 5);
@@ -52,7 +56,4 @@ public class VideoClubTest extends TestCase {
 
 	}
 
-	public static void main(String[] args) {
-		junit.textui.TestRunner.run(suite());
-	}
 }
