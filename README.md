@@ -5,4 +5,4 @@ refactoring-fowler-example
 
 Java code example to teach basic refactoring  concepts.
 
-Travis CI is  applied to continuous integration  and Codacy to continuous quality asurance.
+Travis CI is  applied to continuous integration  and Codacy to continuous quality assurance.
