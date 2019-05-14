@@ -12,7 +12,7 @@ package ubu.gii.dass.refactoring;
  * 
  */
 public class Rental {
-	private Movie _movie;
+	Movie _movie;
 	private int _daysRented;
 
 	public Rental(Movie movie, int daysRented) {
@@ -47,16 +47,6 @@ public class Rental {
 			break;
 		}
 		return result;
-	}
-
-	public int getFrecuentRenterPoints() {
-		// initialize frequent renter points as 1
-		int frequentRenterPoints = 1;
-
-		// add bonus for a two day new release rental
-		if ((getMovie().getPriceCode() == MovieType.NEW_RELEASE) && getDaysRented() > 1)
-			frequentRenterPoints++;
-		return frequentRenterPoints;
 	}
 
 }

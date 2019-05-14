@@ -11,4 +11,8 @@ public abstract class MovieType {
 	}
 
 	public abstract int getTypeCode();
+
+	public int getFrecuentRenterPoints(Rental rental) {
+		return 1;
+	}
 }
