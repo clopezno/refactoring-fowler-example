@@ -1,4 +1,5 @@
 package ubu.gii.dass.refactoring;
+
 /**
  * Tema Refactorizaciones
  * 
@@ -46,6 +47,16 @@ public class Rental {
 			break;
 		}
 		return result;
+	}
+
+	public int getFrecuentRenterPoints() {
+		// initialize frequent renter points as 1
+		int frequentRenterPoints = 1;
+
+		// add bonus for a two day new release rental
+		if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1)
+			frequentRenterPoints++;
+		return frequentRenterPoints;
 	}
 
 }
