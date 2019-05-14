@@ -56,4 +56,9 @@ public class Movie extends MovieType {
 	public int getFrecuentRenterPoints(Rental rental) {
 		return _movieType.getFrecuentRenterPoints(rental);
 	}
+
+	@Override
+	public double getCharge(Rental rental) {
+		return this._movieType.getCharge(rental);
+	}
 }

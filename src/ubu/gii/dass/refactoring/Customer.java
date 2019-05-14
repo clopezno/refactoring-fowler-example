@@ -40,7 +40,7 @@ public class Customer {
 		while (rentals.hasNext()) {
 			double thisAmount = 0;
 			Rental each = rentals.next();
-			thisAmount = each.getCharge();
+			thisAmount = each._movie.getCharge(each);
 
 			frequentRenterPoints += each._movie.getFrecuentRenterPoints(each);
 			// show figures for this rental
@@ -61,7 +61,7 @@ public class Customer {
 		while (rentals.hasNext()) {
 			double thisAmount = 0;
 			Rental each = rentals.next();
-			thisAmount = each.getCharge();
+			thisAmount = each._movie.getCharge(each);
 
 			frequentRenterPoints += each._movie.getFrecuentRenterPoints(each);
 			// show figures for this rental
