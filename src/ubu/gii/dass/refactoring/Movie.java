@@ -12,7 +12,7 @@ package ubu.gii.dass.refactoring;
  * 
  */
 
-public class Movie extends MovieType {
+public class Movie {
 	private String _title;
 	private int _priceCode;
 	private MovieType _movieType;
