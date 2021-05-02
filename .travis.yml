@@ -1,1 +1,5 @@
 language: java
+before_script:
+  - sudo apt-get install ant-optional
+jdk:
+  - openjdk8
