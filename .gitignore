@@ -27,3 +27,6 @@ replay_pid*
 #Eclipse file
 .project
 .classpath
+
+#Maven target
+/target

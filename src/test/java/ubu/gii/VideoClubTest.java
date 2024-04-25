@@ -1,10 +1,11 @@
 package test.java.ubu.gii;
 
-import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import main.java.ubu.gii.Customer;
 import main.java.ubu.gii.Movie;
@@ -22,11 +23,11 @@ import main.java.ubu.gii.Rental;
  * 
  */
 public class VideoClubTest {
-	protected Movie m0, m11, m12, m2;
-	protected Customer c1;
+	protected static Movie m0, m11, m12, m2;
+	protected static Customer c1;
 	
-	@Before
-	public void setUp() {
+	@BeforeAll
+	public static void setUp() {
 		m11 = new Movie("Sky Captain", 1);
 		m12 = new Movie("Alejandro Magno", 1);
 		m0 = new Movie("Accion Mutante", 0);
@@ -35,8 +36,8 @@ public class VideoClubTest {
 		c1 = new Customer("Manuel");
 	}
 
-	@After
-	public void tearDown() throws Exception {}
+	@AfterAll
+	public static void tearDown() throws Exception {}
 
 	@Test
 	public void testAlquiler() {
@@ -56,7 +57,7 @@ public class VideoClubTest {
 				+ "\tHermano Oso\t12.0\n" + "Amount owed is 29.0\n"
 				+ "You earned 4 frequent renter points");
 
-		assertTrue("Calcula mal el alquiler", salidaEsperada.equals(salida));
+		assertTrue(salidaEsperada.equals(salida),"Calcula mal el alquiler");
 
 	}
 
