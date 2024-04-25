@@ -1,4 +1,4 @@
-package ubu.gii.dass.refactoring;
+package main.java.ubu.gii;
 /**
  * Tema Refactorizaciones
  * 
