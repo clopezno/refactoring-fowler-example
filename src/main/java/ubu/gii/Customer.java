@@ -1,4 +1,4 @@
-package main.java.ubu.gii;
+package ubu.gii;
 
 /**
 * Tema  Refactorizaciones 

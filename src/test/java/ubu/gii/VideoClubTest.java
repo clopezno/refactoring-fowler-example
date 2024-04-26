@@ -1,4 +1,4 @@
-package test.java.ubu.gii;
+package ubu.gii;
 
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,9 +7,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import main.java.ubu.gii.Customer;
-import main.java.ubu.gii.Movie;
-import main.java.ubu.gii.Rental;
+import ubu.gii.Customer;
+import ubu.gii.Movie;
+import ubu.gii.Rental;
 
 /**
  * Tema Refactorizaciones
