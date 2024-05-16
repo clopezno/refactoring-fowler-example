@@ -24,7 +24,7 @@ import ubu.gii.Rental;
  */
 public class VideoClubTest {
 	protected static Movie m0, m11, m12, m2;
-	protected static Customer c1;
+	protected static Customer c1,c2;
 	
 	@BeforeAll
 	public static void setUp() {
@@ -60,5 +60,28 @@ public class VideoClubTest {
 		assertTrue(salidaEsperada.equals(salida),"Calcula mal el alquiler");
 
 	}
+	@Test
+    public void testHtmlAlquiler() {
+		c2 = new Customer("Manuel");
+        Rental r1 = new Rental(m11, 5);
+        Rental r2 = new Rental(m0, 1);
+        Rental r3 = new Rental(m2, 10);
 
+        c2.addRental(r1);
+        c2.addRental(r2);
+        c2.addRental(r3);
+
+        String salida = c2.htmlStatement();
+        System.out.printf(salida);
+
+        String salidaEsperada = "<H1>Rental Record for Manuel</H1>\n"
+                + "<H2>Sky Captain 15.0</H2>\n"
+                + "<H2>Accion Mutante 2.0</H2>\n"
+                + "<H2>Hermano Oso 12.0</H2>\n"
+                + "<P>Amount owed is 29.0</P>\n"
+                + "<P>You earned 4 frequent renter points</P>\n";
+
+        assertTrue(salidaEsperada.equals(salida),"Calcula mal el alquiler");
+
+}
 }
