@@ -11,6 +11,9 @@ package ubu.gii.dass.refactoring;
 *
 */
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
 
 public class Customer {
 	private String _name;
@@ -31,29 +34,51 @@ public class Customer {
 	};
 
 	public String statement() {
-		double totalAmount = 0;
-		int frequentRenterPoints = 0;
-		Iterator<Rental> rentals = _rentals.iterator();
-		String result = "Rental Record for " + getName() + "\n";
-		while (rentals.hasNext()) {
-			double thisAmount = 0;
-			Rental each = rentals.next();
-			// determine amounts for each line
-			thisAmount = each.getCharge();
-			
-			// add frequent renter points
-			frequentRenterPoints = updatePoints(frequentRenterPoints, each);
-			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t"
-					+ String.valueOf(thisAmount) + "\n";
-			totalAmount += thisAmount;
-		}
-		// add footer lines
-		result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-		result += "You earned " + String.valueOf(frequentRenterPoints)
-				+ " frequent renter points";
-		return result;
+	    double totalAmount = 0;
+	    int frequentRenterPoints = 0;
+	    Iterator<Rental> rentals = _rentals.iterator();
+	    String result = "Rental Record for " + getName() + "\n";
+	    StringBuilder htmlContent = new StringBuilder();
+
+	    htmlContent.append("<html><head><title>Rental Report</title></head><body>");
+	    htmlContent.append("<h1>Rental Record for " + getName() + "</h1><ul>");
+
+	    while (rentals.hasNext()) {
+	        double thisAmount = 0;
+	        Rental each = rentals.next();
+	        // determine amounts for each line
+	        thisAmount = each.getCharge();
+
+	        // add frequent renter points
+	        frequentRenterPoints = updatePoints(frequentRenterPoints, each);
+
+	        // show figures for this rental
+	        result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
+	        totalAmount += thisAmount;
+
+	        // add to HTML content
+	        htmlContent.append("<li>" + each.getMovie().getTitle() + " - " + thisAmount + "</li>");
+	    }
+
+	    // add footer lines
+	    result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
+	    result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+
+	    // add to HTML content
+	    htmlContent.append("</ul><p>Amount owed is " + totalAmount + "</p>");
+	    htmlContent.append("<p>You earned " + frequentRenterPoints + " frequent renter points</p>");
+	    htmlContent.append("</body></html>");
+
+	    // Write the HTML content to a file
+	    try (FileWriter writer = new FileWriter("informe.html")) {
+	        writer.write(htmlContent.toString());
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    return result;
 	}
+	
 
 	private int updatePoints(int frequentRenterPoints, Rental each) {
 		frequentRenterPoints++;
