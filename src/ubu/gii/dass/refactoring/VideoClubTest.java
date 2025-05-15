@@ -2,6 +2,10 @@ package ubu.gii.dass.refactoring;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +58,33 @@ public class VideoClubTest {
 
 		assertTrue("Calcula mal el alquiler", salidaEsperada.equals(salida));
 
+	}
+
+	@Test
+	public void testHTMLStatementGeneration() throws IOException {
+	    Customer customer = new Customer("HTMLClient");
+	    Movie movie = new Movie("HTML Movie", Movie.NEW_RELEASE);
+	    Rental rental = new Rental(movie, 3);
+	    customer.addRental(rental);
+
+	    // Llama a statement(), que genera el archivo HTML
+	    customer.statement();
+
+	    // Verifica que el archivo se ha creado
+	    File htmlFile = new File("informe.html");
+	    assertTrue("El archivo HTML debería haberse creado.", htmlFile.exists());
+
+	    // Lee el contenido del archivo HTML
+	    String content = new String(Files.readAllBytes(htmlFile.toPath()));
+
+	    // Comprueba que el contenido esperado está presente
+	    assertTrue("Debe contener etiqueta <h1>.", content.contains("<h1>Rental Record for HTMLClient</h1>"));
+	    assertTrue("Debe contener el título de la película dentro de <li>.", content.contains("<li>HTML Movie - 9.0</li>"));
+	    assertTrue("Debe mostrar el total adeudado.", content.contains("<p>Amount owed is 9.0</p>"));
+	    assertTrue("Debe mostrar puntos de cliente frecuente.", content.contains("frequent renter points"));
+
+	    // Limpia el archivo generado
+	    htmlFile.delete();
 	}
 
 }
